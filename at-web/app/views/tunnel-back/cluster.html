@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+    <div class="panel-body">{{$clusterId := .clusterId}}
+        <div class="alert alert-info" role="alert">
+            <strong><span class="glyphicon glyphicon-volume-up"></span> 注意！</strong> 普通用户只能选择普通节点，VIP 可选择VIP节点。<i class="ace-icon fa fa-hand-o-right blue"></i> <a href="">如何成为VIP?</a>
+        </div>
+        <form class="form-horizontal">
+            <input type="hidden" name="role_id" value="" />
+            {{range $name, $regionCluster := .regionClusters}}
+            <h4><span class="label label-default">{{$name}}</span></h4>
+            {{range $regionKey, $regions := $regionCluster}}
+            <ul class="list-group w240 inline-group">
+                <li class="list-group-item"><strong>{{$regions.name}}</strong> <span class="pull-right"><span class="badge"></span></span></li>
+                {{range $clusterKey, $cluster := $regions.clusters}}
+                <li class="list-group-item cluster_{{$cluster.cluster_id}}">{{$cluster.name}}
+                    <span class="pull-right">
+                        <input name="cluster_id" type="radio" value="{{$cluster.cluster_id}}" {{if eq $clusterId $cluster.cluster_id}} checked {{end}}/>
+                    </span>
+                </li>
+                {{end}}
+            </ul>
+            {{end}}
+            {{end}}
+            <div class="form-group">
+                <div class="col-md-8" style="margin-left:10px;">
+                    <button type="button" onclick="fancyboxClose()" class="btn btn-primary">确认</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function fancyboxClose() {
+        var clusterId = $("input[name='cluster_id']:checked").val();
+        var clusterName = $(".cluster_"+clusterId).text();
+        parent.$("input[name='cluster_name']").val(clusterName);
+        parent.$("input[name='cluster_id']").val(clusterId);
+        parent.$.fancybox.close();
+    }
+</script> 

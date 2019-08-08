@@ -1,0 +1,175 @@
+/**********************************************
+
+Template Name: PRIDE - Personal Portfolio Template
+Author: perfect_coders
+Version: 1.0
+Design and Developed by: perfect_coders
+
+NOTE: This is responsive stylesheet of the template, This file contains the styling for various devices like mobile phone, tablet, laptop etc.
+
+*************************************************/
+
+/* Medium Layout: 1280px. */
+@media only screen and (min-width: 992px) and (max-width: 1200px) { 
+  
+    
+}
+/* Tablet Layout: 768px. */
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+   
+    .about-section.section-padding {
+        padding: 120px 0 60px;
+    }
+    
+.about-text{
+    margin-top: 40px;
+}
+.single-review {
+  padding: 50px 60px 10px;
+}
+
+  
+    
+}
+
+
+/* Mobile Layout lower than: 320px. */
+@media only screen and (max-width: 767px) { 
+    
+
+/* HEADER AREA */  
+    
+.custom-navbar{
+    padding: 10px 0;
+    background: rgba(0, 0, 0, 0.8);
+}
+    .custom-navbar .navbar-toggle{
+    float: none;
+    margin: 0;
+    border-color: transparent;
+    padding: 9px;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+    
+.logo a{
+    display: inline-block;
+    margin-top: 10px;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    color: #fff;
+    font-size: 16px;
+}
+.logo a span{
+    font-size: 14px;
+    }
+.main-menu ul.navbar-nav {
+    float: left;
+}
+.main-menu ul.navbar-nav li a{
+    padding: 10px 5px;
+   color: #fff;
+}
+.main-menu ul.nav.navbar-nav li.active:before{
+    display: none;
+}
+.navbar-collapse {
+  border-top: 1px solid transparent;
+  margin-top: 15px;
+}
+
+  .navbar-toggle {
+  border-color: #000;
+  float: none;
+  margin: 0;
+  padding: 10px;
+  -webkit-transition: all 0.5s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
+}
+    .navbar-header .navbar-toggle .icon-bar {
+  background: none repeat scroll 0 0 #fff;
+}
+.navbar-header {
+    display: inline-block;
+    float: right;
+    margin-top: 5px;
+}
+.mobile-menu-activated ul.nav.navbar-nav{}
+.mobile-menu-activated ul.nav.navbar-nav li{display: block;text-align: left;}
+.mobile-menu-activated ul.nav.navbar-nav li a{}
+.main-menu ul.navbar-nav{
+    text-align: left !important;
+    display: block;
+}
+    
+    
+    
+/* WELCOME AREA */
+    .welcome-text {
+  width: 100%;
+}
+    .welcome-text h1 {
+  font-size: 30px;
+  letter-spacing: 4px;
+  line-height: 45px;
+}
+   .welcome-text h4 {
+  letter-spacing: 6px;
+}
+
+     
+  
+/* ABOUT SECTION */
+.author-image {
+    margin-bottom: 0px;
+}
+    .about-text{
+    margin-top: 40px;
+}
+    .about-text h3{
+    font-size: 26px;
+}
+
+
+    
+/* services section */
+    .single-services {
+      margin-bottom: 40px;
+}
+   
+    .single-services.last-service{
+        margin-bottom: 0px;
+    }
+
+    
+/* CONTACT INFO SECTION */
+form input[type="submit"] {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 14px 28px;
+  width: 100%;
+}
+    
+    .full-adress {
+  margin-top: 60px;
+    margin-left: 0px;
+}
+   .single-review {
+  padding: 50px 0px 10px;
+} 
+
+/* FOOTER SECTION */
+.footer{
+    
+}
+
+    
+    
+}
+
+
+/* Wide Mobile Layout: 480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) { 
+   
+}
+

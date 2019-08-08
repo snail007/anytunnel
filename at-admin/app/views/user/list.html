@@ -1,0 +1,61 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <form action="/user/list" method="get">
+                <div class="col-md-3 col-md-offset-9">
+                    <div class="input-group">
+                        <input class="form-control" name="keyword" type="text" value="{{.keyword}}" placeholder="用户名">
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center w8p">ID</th>
+                    <th class="center w11p">用户名</th>
+                    <th class="center w11p">真实姓名</th>
+                    <th class="center w20p">角色</th>
+                    <th class="center w15p">邮箱</th>
+                    <th class="center w8p">状态</th>
+                    <th class="center w11p">创建时间</th>
+                    <th class="center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range $user := .users}}
+                <tr>
+                    <td class="center">{{$user.user_id}}</td>
+                    <td class="center">{{$user.username}}</td>
+                    <td class="center">{{$user.given_name}}</td>
+                    <td>
+                        {{range $userId, $roleName := $.userRoles}} {{if eq $userId $user.user_id}} {{$roleName}} {{end}} {{end}}
+                    </td>
+                    <td class="center">{{$user.email}}</td>
+                    <td class="center">
+                        {{if eq $user.is_forbidden "0"}}
+                        <span class="label label-success">正常</span> {{else}}
+                        <span class="label label-danger">屏蔽</span> {{end}}
+                    </td>
+                    <td class="center">
+                        {{dateFormat $user.create_time "Y-m-d H:i:s"}}
+                    </td>
+                    <td class="center">
+                        <a name="edit" href="/user/edit?user_id={{$user.user_id}}"><i class="glyphicon glyphicon-pencil"> </i>修改</a> {{if eq $user.is_forbidden "0"}}
+                        <a name="forbidden" data-toggle="confirmation" data-placement="left" data-title="确定禁用吗?" href="/user/forbidden?user_id={{$user.user_id}}"><i class="glyphicon glyphicon-remove"> </i>禁用</a> {{else}}
+                        <a name="review" data-toggle="confirmation" data-placement="left" data-title="确定恢复吗?" href="/user/review?user_id={{$user.user_id}}"><i class="glyphicon glyphicon-ok"> </i>恢复</a> {{end}}
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer pagebar">
+        {{str2html .page}}
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<style>
+    .forx {
+        display: none;
+    }
+    
+    .selectator_element {
+        border-radius: 0;
+    }
+</style>
+{{$user:=.user}}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal ajaxform" ajaxSuccess="success" ajaxAlways="always" method="post" action="/web/user/{{.action}}">
+            <input type="hidden" name="user_id" value="{{$user.user_id}}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>登录名</label>
+                <div class="col-sm-4">
+                    <input type="text" name="username" class="form-control" {{if eq .action "edit"}}disabled{{end}} value="{{$user.username}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * 请限制在15个字符以内</span>
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>昵称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="nickname" class="form-control" value="{{$user.nickname}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>密码</label>
+                <div class="col-sm-4">
+                    <input type="password" name="password" class="form-control" value="">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>邮箱</label>
+                <div class="col-sm-4">
+                    <input type="text" name="email" class="form-control" value="{{$user.email}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="text-danger"> * </span>角色</label>
+                <div class="col-md-4">
+                    <select id="roles_selector" class="form-control" name="role_ids" size="1" multiple style="padding: 0;">
+                        {{range $role := .roles}}
+                        <option value="{{$role.role_id}}" {{if eq $role.is_default "1"}} selected {{end}}>{{$role.name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        $('#roles_selector').selectator({
+            showAllOptionsOnFocus: true
+        });
+    })
+</script>

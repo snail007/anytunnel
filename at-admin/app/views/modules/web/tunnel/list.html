@@ -1,0 +1,67 @@
+{{$tunnels:=.tunnels}}
+
+<div class="panel panel-default" style="margin-bottom:80px;">
+    <form action="/web/tunnel/list" method="get">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-3">
+                    <select class="form-control" name="type">
+                            <option value="user_id">用户ID</option>
+                            <option value="server_id">ServerID</option>
+                            <option value="client_id">ClientID</option>
+                            <option value="cluster_id">ClusterID</option>
+                            <option value="mode">模式[0普通|1高级|2特殊]</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" name="id" type="text" placeholder="ID">
+                </div>
+                <div class="col-md-1">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center w5p">ID</th>
+                    <th class="center w5p">模式</th>
+                    <th class="center w5p">用户ID</th>
+                    <th class="center w5p">ServerID</th>
+                    <th class="center w5p">ClientID</th>
+                    <th class="center w5p">ClusterID</th>
+                    <th class="center w5p">协议</th>
+                    <th class="center w10p">监听</th>
+                    <th class="center w10p">本地</th>
+                    <th class="center w5p">带宽</th>
+                    <th class="center w15p">更新时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range $tunnel := .tunnels}}
+                <tr>
+                    <td class="center">{{$tunnel.tunnel_id}}</td>
+                    <td class="center">{{if eq $tunnel.mode "0"}}普通{{else}}{{if eq $tunnel.mode "1"}}高级{{else}}特殊{{end}}{{end}}</td>
+                    <td class="center">{{$tunnel.user_id}}</td>
+                    <td class="center">{{$tunnel.server_id}}</td>
+                    <td class="center">{{$tunnel.client_id}}</td>
+                    <td class="center">{{$tunnel.cluster_id}}</td>
+                    <td class="center">{{$tunnel.protocol}}</td>
+                    <td class="center">{{$tunnel.server_listen_ip}}{{$tunnel.server_listen_port}}</td>
+                    <td class="center">{{$tunnel.client_local_host}}{{$tunnel.client_local_port}}</td>
+                    <td class="center">{{$tunnel.bandwidth_human}}</td>
+                    <td class="center">{{dateFormat $tunnel.update_time "Y-m-d H:i:s"}}</tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer pagebar">
+        <div class="pull-right">{{str2html .page}}</div>
+        <div style="clear:both;"></div>
+    </div>
+</div>

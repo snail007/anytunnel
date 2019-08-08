@@ -1,0 +1,71 @@
+<style>
+    .btn-warning,
+    .label-warning,
+    .progress-bar-warning {
+        color: white;
+    }
+</style>
+{{$conns:=.conns}}
+
+<div class="panel panel-default" style="margin-bottom:80px;">
+    <form action="/web/conn/list" method="get">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" name="col">
+                            <option value="user_id">UserID</option>
+                            <option value="cluster_id">ClusterID</option>
+                            <option value="server_id">ServerID</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" name="keyword" type="text" placeholder="">
+                </div>
+                <div class="col-md-1">
+                    <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center w5p">隧道ID</th>
+                    <th class="center w10p">ClusterID</th>
+                    <th class="center w5p">ServerID</th>
+                    <th class="center w5p">UserID</th>
+                    <th class="center w5p"><a href="?orderby=count&col={{$.col}}&keyword={{$.keyword}}&page={{$.p}}" title="连接数倒序排序">连接数</a></th>
+                    <th class="center w10p"><a href="?orderby=upload&col={{$.col}}&keyword={{$.keyword}}&page={{$.p}}" title="上传速度倒序排序">上传速度</a></th>
+                    <th class="center w10p"><a href="?orderby=download&col={{$.col}}&keyword={{$.keyword}}&page={{$.p}}" title="下载速度倒序排序">下载速度</a></th>
+                    <th class="center w10p"><a href="?orderby=update_time&col={{$.col}}&keyword={{$.keyword}}&page={{$.p}}" title="更新时间倒序排序">更新时间</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range $conn := .conns}}
+                <tr>
+                    <td class="center">{{$conn.tunnel_id}}</td>
+                    <td class="center">{{$conn.cluster_id}}</td>
+                    <td class="center">{{$conn.server_id}}</td>
+                    <td class="center">{{$conn.user_id}}</td>
+                    <td class="center">{{$conn.count}}</td>
+                    <td class="center">{{$conn.upload}}</td>
+                    <td class="center">{{$conn.download}}</td>
+                    <td class="center">
+                        {{dateFormat $conn.update_time "Y-m-d H:i:s"}}
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer pagebar">
+        <div class="pull-right">{{str2html .page}}</div>
+        <div style="clear:both;"></div>
+    </div>
+</div>

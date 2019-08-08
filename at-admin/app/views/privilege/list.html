@@ -1,0 +1,17 @@
+<div class="panel panel-default" style="margin-bottom:80px;">
+    <div class="panel-body">
+        {{range $navigator := .navigators}}
+        <h4><span class="label label-default">{{$navigator.name}}</span> <span class="small"><a name='edit' href="/privilege/edit?privilege_id={{$navigator.privilege_id}}">改</a> | <a data-toggle="confirmation" data-placement="bottom" data-title="确定删除吗?" href='/privilege/delete?privilege_id={{$navigator.privilege_id}}'>删</a></span></h4>
+        {{range $menu := $.menus}} {{if eq $menu.parent_id $navigator.privilege_id}}
+        <ul class="list-group w240 inline-group">
+            <li class="list-group-item"><strong>{{$menu.name}}</strong> <span class="pull-right"><a name='edit' href='/privilege/edit?privilege_id={{$menu.privilege_id}}'>改</a> | <a data-toggle="confirmation" data-placement="bottom" data-title="确定删除吗?" href='/privilege/delete?privilege_id={{$menu.privilege_id}}'>删</a></span></li>
+            {{range $controller := $.controllers}} {{if eq $controller.parent_id $menu.privilege_id}}
+            <li class="list-group-item">{{$controller.name}}<span class="pull-right"><a name='edit' href='/privilege/edit?privilege_id={{$controller.privilege_id}}'>改</a> | <a data-toggle="confirmation" data-placement="bottom" data-title="确定删除吗?" href='/privilege/delete?privilege_id={{$controller.privilege_id}}'>删</a></span></li>
+            {{end}} {{end}}
+        </ul>
+        {{end}} {{end}} {{end}}
+    </div>
+</div>
+<script type="text/javascript">
+    //    Popup.bindIframe('[name="edit"]', '修改权限信息');
+</script>

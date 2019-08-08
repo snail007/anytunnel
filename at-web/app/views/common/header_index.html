@@ -1,0 +1,56 @@
+<div id="home" class="intro-section">
+    <header class="navbar custom-navbar" style="border-radius:0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="logo">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                        </div>
+                        <a href="#home">{{config "String" "sys.fullname" ""}}</a>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <nav class="main-menu">
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="active smooth-scroll"><a class="theme-color" href="#home">首页</a></li>
+                                <li class="smooth-scroll"><a class="theme-color" href="#services">服务</a></li>
+                                {{if eq .isLogin "1"}}
+                                <li class="smooth-scroll"><a class="theme-color" href="/user/index">个人中心</a></li>
+                                <li class="smooth-scroll"><a class="theme-color" href="/author/logout">退出</a></li>
+                                {{else}}
+                                <li class="smooth-scroll"><a class="theme-color" href="/author/login">登录</a></li>
+                                <li class="smooth-scroll"><a class="theme-color" href="/author/register">注册</a></li>
+                                {{end}}
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="welcome-area">
+        <div id="particles-js"></div>
+        <div class="welcome-table">
+            <div class="welcome-cell">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="welcome-text text-center">
+                                <h4>隧道云</h4>
+                                <h1>让你轻松<span class="theme-color">连通</span>世界每个角落 </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#services" class="scroll-btn banner-icon theme-color"><i class="fa fa-angle-double-down"></i></a>
+    </div>
+</div>

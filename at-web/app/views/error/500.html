@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="alert alert-danger" role="alert">
+            <strong><span class="blue bigger-125">
+                <i class="ace-icon fa fa-random"></i>
+            </span></strong> 很抱歉，服务器返回错误！
+        </div>
+        <div class="space"></div>
+        <div>
+            <h4 class="lighter smaller">以下是具体的错误信息:</h4>
+            <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                <li>
+                    <i class="ace-icon fa fa-hand-o-right blue"></i>
+                    <span class="text-danger">{{.errorMessage}}</span>
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <div class="space"></div>
+        <div class="center" style="text-align: center">
+            <a href="javascript:history.back()" class="btn btn-default">
+                <i class="ace-icon fa fa-arrow-left"></i>
+                返回
+            </a>
+            <a target="_parent" href="/main/index" class="btn btn-primary">
+                <i class="ace-icon fa fa-tachometer"></i>
+                首页
+            </a>
+        </div>
+    </div>
+</div>

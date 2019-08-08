@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+    <br>{{$clientValue := .clientValue}}
+    <div class="panel-body">
+        <form class="form-horizontal" method="post" action="{{if eq $clientValue.client_id "0"}} /client/save {{else}} /client/modify {{end}}">
+            <input type="hidden" name="client_id" value="{{$clientValue.client_id}}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>Client名称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control" value="{{$clientValue.name}}" placeholder="请输入 Client 名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" name="submit"  onclick="Form.ajaxSubmit(this.form, false)" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

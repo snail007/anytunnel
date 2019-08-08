@@ -1,0 +1,78 @@
+<style>
+    .btn-warning,
+    .label-warning,
+    .progress-bar-warning {
+        color: white;
+    }
+</style>
+{{$packages:=.packages}}
+
+<div class="panel panel-default" style="margin-bottom:80px;">
+    <form action="/web/package/list" method="get">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" name="keyword" type="text" placeholder="UserID">
+                </div>
+                <div class="col-md-1">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center w5p">ID</th>
+                    <th class="center w5p">UserID</th>
+                    <th class="center w10p">流量包大小</th>
+                    <th class="center w5p">已用流量</th>
+                    <th class="center w5p">状态</th>
+                    <th class="center w10p">生效时间</th>
+                    <th class="center w10p">过期时间</th>
+                    <th class="center w10p">更新时间</th>
+                    <th class="center w5p">获取方式</th>
+                    <th class="center w5p">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range $package := .packages}}
+                <tr>
+                    <td class="center">{{$package.package_id}}</td>
+                    <td class="center">{{$package.user_id}}</td>
+                    <td class="center">{{$package.bytes_total_human}}</td>
+                    <td class="center">{{$package.bytes_use_human}}</td>
+                    <td class="center">{{str2html $package.status}}</td>
+                    <td class="center">
+                        {{dateFormat $package.start_time "Y-m-d H:i:s"}}
+                    </td>
+                    <td class="center">
+                        {{dateFormat $package.end_time "Y-m-d H:i:s"}}
+                    </td>
+                    <td class="center">
+                        {{dateFormat $package.update_time "Y-m-d H:i:s"}}
+                    </td>
+                    <td class="center">{{$package.comment}}</td>
+                    <td class="center">
+                        <a name="edit" href="/web/package/edit?package_id={{$package.package_id}}"><i class="glyphicon glyphicon-pencil"> </i>修改</a>
+                        <!-- <a name="delete" data-toggle="confirmation" data-placement="left" data-title="确定删除吗?" href="/web/package/delete?package_id={{$package.package_id}}"><i class="glyphicon glyphicon-remove"> </i>删除</a> -->
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer pagebar">
+        <div class="pull-right">{{str2html .page}}</div>
+        <div style="clear:both;"></div>
+    </div>
+</div>

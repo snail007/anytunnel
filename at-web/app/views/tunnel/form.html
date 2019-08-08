@@ -1,0 +1,88 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4><span class="label label-danger">第三步：</span> 请填写隧道信息 </h4>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" method="post" action="/tunnel/save">
+            <input type="hidden" name="mode" value="{{.mode}}">
+            <input type="hidden" name="cluster_id" value="{{.clusterId}}">
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span class="text-danger"> * </span>隧道名称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control" value="" placeholder="请输入隧道名称">
+                </div>
+            </div>
+            {{if eq .isHaveServer "1"}}
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span class="text-danger"> * </span> 选择Server</label>
+                <div class="col-sm-4">
+                    <select name="server_id" class="form-control">
+                        {{range $serverValue := .serverValues}}
+                        <option value="{{$serverValue.server_id}}">{{$serverValue.name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span class="text-danger"> * </span>Server绑定IP</label>
+                <div class="col-sm-4">
+                    <input type="text" name="server_listen_ip" class="form-control" value="" placeholder="请输入Server绑定IP">
+                </div>
+            </div>
+            {{else}}
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span class="text-danger"> * </span> Server</label>
+                <div class="col-sm-4">
+                    <input type="hidden" name="server_id" class="form-control" value="{{.systemServer.cs_id}}" readonly>
+                    <input type="text" class="form-control" value="系统server" readonly>
+                </div>
+            </div>
+            {{end}}
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span class="text-danger"> * </span>Server端口</label>
+                <div class="col-sm-4">
+                    <input type="text" name="server_listen_port" class="form-control" value="" placeholder="请输入Server端口">
+                </div>
+            </div>
+            {{if eq .isHaveClient "1"}}
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span class="text-danger"> * </span> 选择Client</label>
+                <div class="col-sm-4">
+                    <select name="client_id" class="form-control">
+                        {{range $clientValue := .clientValues}}
+                        <option value="{{$clientValue.client_id}}">{{$clientValue.name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span class="text-danger"> * </span>Client绑定IP</label>
+                <div class="col-sm-4">
+                    <input type="text" name="client_local_host" class="form-control" value="" placeholder="请输入Server绑定IP">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span class="text-danger"> * </span>Client监听端口</label>
+                <div class="col-sm-4">
+                    <input type="text" name="client_local_port" class="form-control" value="" placeholder="请输入Server监听端口">
+                </div>
+            </div>
+            {{else}}
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span class="text-danger"> * </span> Client</label>
+                <div class="col-sm-4">
+                    <input type="hidden" name="client_id" class="form-control" value="{{.systemClient.cs_id}}" readonly>
+                    <input type="text" class="form-control" value="系统client" readonly>
+                </div>
+            </div>
+            {{end}}
+            <div class="form-group center">
+                <div class="col-sm-12">
+                    <a type="button" href="javascript:history.back(-1)" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>上一步</a>
+                    <button type="button" name="submit"  onclick="Form.ajaxSubmit(this.form, false)" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-ok"></span> 保存 </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

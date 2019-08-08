@@ -1,0 +1,14 @@
+{{$regions:=.regions}}
+
+<div class="panel panel-default" style="margin-bottom:80px;">
+    <div class="panel-body">
+        {{range $region := $regions}} {{if eq $region.parent_id "0"}}
+        <ul class="list-group w240 inline-group">
+            <li class="list-group-item"><strong>{{$region.name}}</strong> <span class="pull-right"><a name='edit' href='/web/region/edit?region_id={{$region.region_id}}'>改</a> | <a data-toggle="confirmation" data-placement="bottom" data-title="确定删除吗?" href='/web/region/delete?region_id={{$region.region_id}}'>删</a></span></li>
+            {{range $item := $regions}} {{if eq $item.parent_id $region.region_id}}
+            <li class="list-group-item">{{$item.name}}<span class="pull-right"><a name='edit' href='/web/region/edit?region_id={{$item.region_id}}'>改</a> | <a data-toggle="confirmation" data-placement="bottom" data-title="确定删除吗?" href='/web/region/delete?region_id={{$item.region_id}}'>删</a></span></li>
+            {{end}} {{end}}
+        </ul>
+        {{end}} {{end}}
+    </div>
+</div>

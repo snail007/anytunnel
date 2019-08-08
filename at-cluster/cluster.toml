@@ -1,0 +1,53 @@
+[port]
+ip-data=["0.0.0.0"]
+conns=37501
+
+ip-control=["0.0.0.0"]
+control=37601
+
+ip-api=["0.0.0.0"]
+api=37080
+
+[auth]
+file="./.anytunnel/auth-file.txt"
+
+[url]
+#if all url is not internal，this decide http's configuration when access all url
+is-internal=false
+#retry count when access all url fail
+fail-retry=1
+#wait seconds when access all url fail
+fail-wait=3
+#this decide access url if success or not,check compare this code and 
+#response http code after access all url,
+success-code=204
+#check token when c/s login in,this url return http status 201 auth success,
+#other fail.when access this url token will attached ,such as url?token=xxx
+#auth="https://127.0.0.1:37081/cs/auth"
+auth="https://127.0.0.1:37081/cs/auth"
+#server/client online or offline , cluster will access this url
+#status="https://127.0.0.1:37081/cs/status"
+status="https://127.0.0.1:37081/cs/status"
+#post traffic statist to this url , if url not empty.
+#traffic="https://127.0.0.1:37081/user/traffic"
+traffic="https://127.0.0.1:37081/user/traffic"
+#post traffic to "traffic-url" , every "traffic-interval" seconds
+traffic-interval=30
+
+[data]
+dir="./data"
+
+[log]
+open=true
+#which level log to file,default:["info","error","debug"]
+level = ["info","error","debug"]
+dir = "log"
+#log file max size(bytes) for rotate
+FileMaxSize = 102400000
+#log file max count for rotate to remain
+MaxCount = 3
+#access log on or off
+access = true
+#log post data on or off
+post = false
+

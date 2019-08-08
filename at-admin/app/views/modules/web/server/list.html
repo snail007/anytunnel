@@ -1,0 +1,66 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <i class="label label-default">类型</i>
+                <a class="label {{if ne $.userID `0`}}label-danger{{else}}label-default{{end}}" href="/web/server/list">用户</a>
+                <a class="label {{if eq $.userID `0`}}label-danger{{else}}label-default{{end}}" href="/web/server/list?user_id=0">系统</a>
+            </div>
+            {{if ne $.userID "0"}}
+            <div class="col-md-3 pull-right">
+                <form action="/web/server/list" method="get">
+                    <div class="input-group">
+                        <input class="form-control" name="user_id" type="text" placeholder="UserID">
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            {{end}}
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center w10p">ID</th>
+                    <th class="center w15p">名称</th>
+                    <th class="center w30p">Token</th>
+                    <th class="center w10p">UserID</th>
+                    <th class="center w15p">创建时间</th>
+                    {{if eq $.userID "0"}}
+                    <th class="center">操作</th>
+                    {{end}}
+                </tr>
+            </thead>
+            <tbody>
+                {{range $server := .servers}}
+                <tr>
+                    <td class="center">{{$server.server_id}}</td>
+                    <td class="center">{{$server.name}}</td>
+                    <td class="center">{{$server.token}}</td>
+                    <td class="center">
+                        {{if eq $server.user_id "0"}} <span class="label label-info">系统</span> {{else}} {{$server.user_id}} {{end}}
+                    </td>
+                    <td class="center">
+                        {{dateFormat $server.create_time "Y-m-d H:i:s"}}
+                    </td>
+
+                    {{if eq $server.user_id "0"}}
+                    <td class="center">
+                        <a name="edit" href="/web/server/edit?server_id={{$server.server_id}}"><i class="glyphicon glyphicon-pencil"> </i>修改</a>
+                        <a data-toggle="confirmation" data-placement="left" data-title="确定重置token吗?(Server会被下线)" href="/web/server/reset?server_id={{$server.server_id}}"><i class="glyphicon glyphicon-refresh"> </i>重置</a>
+                        <a name="delete" data-toggle="confirmation" data-placement="left" data-title="确定删除吗?" href="/web/server/delete?server_id={{$server.server_id}}"><i class="glyphicon glyphicon-remove"> </i>删除</a>
+                    </td>
+                    {{end}}
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer pagebar">
+        <div class="pull-right">{{str2html .page}}</div>
+        <div style="clear:both;"></div>
+    </div>
+</div>

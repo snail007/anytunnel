@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center w10p">ID</th>
+                    <th class="center w10p">角色名</th>
+                    <th class="center w10p">带宽限制</th>
+                    <th class="center w10p">Server区域</th>
+                    <th class="center w10p">Client区域</th>
+                    <th class="center w10p">隧道模式</th>
+                    <th class="center w15p">创建时间</th>
+                    <th class="center w20p">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range $role := .roles}}
+                <tr>
+                    <td class="center">{{$role.role_id}}</td>
+                    <td class="center">{{$role.name}}</td>
+                    <td class="center">{{$role.bandwidth_human}}</td>
+                    <td class="center">
+                        {{if eq $role.server_area "china"}}中国{{end}} {{if eq $role.server_area "foreign"}}国外{{end}} {{if eq $role.server_area "all"}}全部{{end}}
+                    </td>
+                    <td class="center">
+                        {{if eq $role.client_area "china"}}中国{{end}} {{if eq $role.client_area "foreign"}}国外{{end}} {{if eq $role.client_area "all"}}全部{{end}}
+                    </td>
+                    <td class="center">
+                        {{$role.tunnel_mode_human}}
+                    </td>
+                    <td class="center">
+                        {{dateFormat $role.create_time "Y-m-d H:i:s"}}
+                    </td>
+                    <td class="center">
+                        <a name="privilege" href="/web/role/regions?role_id={{$role.role_id}}"><i class="glyphicon glyphicon-lock"> </i>区域</a>
+                        <a name="edit" href="/web/role/edit?role_id={{$role.role_id}}"><i class="glyphicon glyphicon-pencil"> </i>修改</a>
+                        <a name="delete" data-toggle="confirmation" data-placement="left" data-title="确定删除吗?" href="/web/role/delete?role_id={{$role.role_id}}"><i class="glyphicon glyphicon-remove"> </i>删除</a>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>

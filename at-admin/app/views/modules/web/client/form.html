@@ -1,0 +1,45 @@
+<style>
+    .forx {
+        display: none;
+    }
+</style>
+{{$client:=.client}}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal ajaxform" ajaxSuccess="success" ajaxAlways="always" method="post" action="/web/client/{{.action}}">
+            <input type="hidden" name="client_id" value="{{$client.client_id}}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>Client名称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control" value="{{$client.name}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * 请将汉字限制在15个以内</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>本地网络Host</label>
+                <div class="col-sm-4">
+                    <input type="text" name="local_host" class="form-control" value="{{$client.local_host}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * 需要暴露的Client所在网络的host，只要是Client可以访问的IP或者域名都可以</span>
+                </div>
+            </div>
+            <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="text-danger"> * </span>本地网络端口</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="local_port" class="form-control" value="{{$client.local_port}}">
+                    </div>
+                    <div class="col-md-4">
+                        <span class="text-danger"> * 对应上面的：本地网络Host，需要暴露的端口</span>
+                    </div>
+                </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

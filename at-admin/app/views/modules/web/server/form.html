@@ -1,0 +1,36 @@
+<style>
+    .forx {
+        display: none;
+    }
+</style>
+{{$server:=.server}}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal ajaxform" ajaxSuccess="success" ajaxAlways="always" method="post" action="/web/server/{{.action}}">
+            <input type="hidden" name="server_id" value="{{$server.server_id}}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>Server名称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control" value="{{$server.name}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * 请将汉字限制在15个以内</span>
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>UserID</label>
+                <div class="col-sm-4">
+                    <input type="text" name="user_id" class="form-control" value="{{$server.user_id}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * 留空为系统Server</span>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

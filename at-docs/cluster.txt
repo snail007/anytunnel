@@ -1,0 +1,48 @@
+cluster 启动重要参数说明:
+
+--auth-url            Token验证接口,应该是api验证接口,
+                      访问url的时候会在url后面加上token和type参数,比如:https://at.com/cluster?token=xxxx&type=server
+                      type是server或者client,token就是server或client登录时的token
+                      返回状态码必须是204代表验证成功。其它情况验证失败，返回内容可以作为失败提示,拒绝登录
+
+--auth-file           server和client token验证文件,一行一个token,
+                      server的token以server:开头,client的token以client:开头,其他格式无效
+
+--bind-ip-api         API端口绑定IP,默认是:0.0.0.0
+
+--bind-ip-data        数据端口绑定IP,默认是:0.0.0.0
+
+--bind-ip-control     控制端口绑定IP,默认是:0.0.0.0
+
+--conns-port          数据端口,默认是:37501
+
+--control-port        控制端口,默认是:37501
+
+--api-port            API端口,默认是:37080
+
+--status-url          server或者client上线下线状态上报地址,如果设置了该地址,那么server或者
+                      client上线下线的时候都会访问该url,会带上token参数,type参数,action参数,ip参数
+                      token:是server或者client的登录token
+                      type:类型,是server或client
+                      action:动作,是online表示上线,是offline表示下线
+                      ip:server或者client的外网IP，也就是所连接cluster看见的server或者client的IP
+--traffic-url         Tunnel产生的流量和连接数上报地址，如果设置了，默认每30秒上报一次。
+                      post的json数据格式如下：
+                      {"1":{"positive":3231,"negative":5324,"connCount":32}}
+                      1是TunnelID，positive是上传的字节数（s->c），negative是下载的字节数(c->s)
+                      累加上报的字节数即可。connCount是当前TunnelID的连接数。
+提示:
+
+1.--auth-file和--auth-url至少要配置一个,不然c/s是无法登录的.
+
+2.验证的过程是,如果设置了--auth-file,首先去--auth-file里面找token如果找到验证成功,
+  如果找不到,接着看是否设置了--auth-url,如果没有设置验证失败,
+  如果设置了,那么就会访问--auth-url进行验证.
+
+
+
+poster:
+http://patorjk.com/software/taag/
+字体:
+ANSI FIGIlet Fonts
+Calvin S

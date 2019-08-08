@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="UTF-8">
+    <title>{{.title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="/static/index/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/index/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/index/fonts.googleapis.com.css">
+    <link rel="stylesheet" href="/static/index/ace.min.css" class="ace-main-stylesheet" id="main-ace-style">
+    <link rel="stylesheet" href="/static/index/ace-skins.min.css">
+    <link rel="stylesheet" href="/static/index/ace-rtl.min.css">
+    <script src="/static/index/ace-extra.min.js"></script>
+    <link rel="shortcut icon" href="/static/index/favicon2.ico">
+    <style>
+        ul.nav-list {
+            display: none;
+        }
+        
+        ul.nav-list.showul {
+            display: block
+        }
+        
+        .ace-save-state {
+            animation-duration: 10ms;
+            animation-delay: 0s;
+            animation-name: nodeInserted;
+        }
+        
+        .nav.navbar-nav li:focus,
+        .nav.navbar-nav a:focus,
+        .navbar-header a:focus {
+            outline: none;
+        }
+        
+        .nav-active {
+            background-color: rgb(40, 40, 40);
+        }
+    </style>
+</head>
+
+<body class="skin-3 no-skin">
+    <div id="navbar" class="navbar navbar-default ace-save-state navbar-fixed-top">
+        <div class="navbar-container ace-save-state" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="/main/index.html" class="navbar-brand">
+                    <small>
+							<img width="26px" style="margin-top:-4px" src="/static/index/favicon.png">
+							{{config "String" "sys.name" ""}} Admin
+						</small>
+                </a>
+            </div>
+            <nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    {{range .navigators}}
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i class="ace-icon {{.icon}}"></i> {{.name}}
+                        </a>
+                    </li>
+                    {{end}}
+                </ul>
+            </nav>
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    <li class="dark dropdown-modal">
+                        <a data-toggle="dropdown" href="/static/index/#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="/static/index/user.jpg" alt="Jason's Photo">
+                            <span class="user-info">
+									<small>Welcome,</small>
+									{{.loginUser.given_name}}
+								</span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/login/logout.html">
+                                    <i class="ace-icon fa fa-power-off"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <!-- /.navbar-container -->
+    </div>
+
+    <div class="main-container ace-save-state" id="main-container">
+        <div id="sidebar" class="sidebar  responsive   ace-save-state sidebar-fixed sidebar-scroll" data-sidebar="true" data-sidebar-scroll="true" data-sidebar-hover="true">
+            {{$navigators := .navigators}} {{$menus := .menus}} {{$controllers := .controllers}} {{range $i,$nav := $navigators}}
+            <ul class="nav nav-list {{if eq $i 0}}showul{{end}}">
+                {{range $menu := $menus}} {{if eq $nav.privilege_id $menu.parent_id}}
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon {{.icon}}"></i>
+                        <span class="menu-text">
+								{{$menu.name}}
+							</span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        {{range $controller := $controllers}} {{if eq $menu.privilege_id $controller.parent_id}}
+                        <li class="">
+                            <a href="/{{$controller.controller}}/{{$controller.action}}">
+                                <i class="menu-icon fa fa-caret-right"></i> {{$controller.name}}
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        {{end}} {{end}}
+                    </ul>
+                </li>
+                {{end}} {{end}}
+            </ul>
+            <!-- /.nav-list -->
+            {{end}}
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="main-content-inner">
+
+                <div style="margin:0;background-color:white;" class="breadcrumbs ace-save-state breadcrumbs-fixed" id="breadcrumbs">
+                    <ul class="breadcrumb" style="border-radius:4px;padding:8px;margin:8px 8px 0;background-color:rgb(231, 242, 248);width:100%;height:100%;">
+                        <li>
+                            <i class="ace-icon fa fa-home home-icon"></i>
+                            <a href="javascript:void(0)" class="navText">后台</a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)" class="menuText">首页</a>
+                        </li>
+                        <li class="active controllerText">Welcome</li>
+                    </ul>
+                    <!-- /.breadcrumb -->
+                </div>
+
+                <div class="page-content" style="padding-top: 43px;padding-bottom:0px;">
+                    <div class="row">
+                        <!--<div class="col-xs-12">-->
+                        <!-- PAGE CONTENT BEGINS -->
+                        <iframe id="main" name="main" src="/main/default.html" scrolling="yes" style="overflow-y:auto;border:none;" frameborder="yes" width="100%" height="100%"></iframe>
+                        <!-- PAGE CONTENT ENDS -->
+                        <!--</div>-->
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+        </div>
+        <!-- /.main-content -->
+
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="footer-content">
+                    <span class="bigger-120">
+							<span class="blue bolder">{{config "String" "sys.name" ""}}</span> Application © 2017-{{.TimeNowYear}}
+                    </span>
+                    <!-- &nbsp; &nbsp; -->
+                    <!-- <span class="action-buttons">
+							<a href="/static/index/#">
+								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+							</a>
+
+							<a href="/static/index/#">
+								<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+							</a>
+
+							<a href="/static/index/#">
+								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+							</a>
+						</span> -->
+                </div>
+            </div>
+        </div>
+
+        <a href="/static/index/#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+    </div>
+    <script src="/static/index/jquery-2.1.4.min.js"></script>
+    <script src="/static/index/bootstrap.min.js"></script>
+    <script src="/static/index/ace-elements.min.js"></script>
+    <script src="/static/index/ace.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var prefix = location.protocol + "//" + location.host
+            setInterval(function() {
+                var mainheight = $("#main").contents().find("body").height();
+                var minHeight = $(window).height() - 200
+                if (mainheight < minHeight) {
+                    mainheight = minHeight
+                }
+                $("#main").height(mainheight);
+            }, 200);
+            $('ul.nav-list a').not('.dropdown-toggle').click(function() {
+                $("ul.nav-list li.active").removeClass('active');
+                $(this).parent().addClass("active");
+                var controller = $.trim($(this).text());
+                var menu = $.trim($(this).parent().parent().parent().find('>a').text());
+                var index = $('ul.nav-list').index($(this).parent().parent().parent().parent());
+                var nav = $.trim($('.navbar-menu a').eq(index).text());
+                if (nav && menu && controller) {
+                    $('.navText').text(nav);
+                    $('.menuText').text(menu);
+                    $('.controllerText').text(controller);
+                    $('.breadcrumbs').removeClass("hide").show()
+                }
+                location.href = '/main/index.html#' + (this.href + "").replace(prefix, "");
+                $('#main').attr('src', this.href);
+                return false
+            });
+            var hash = location.hash;
+            if (hash) {
+                var found = false
+                $('ul.nav-list a').not('.dropdown-toggle').each(function() {
+                    if ((this.href + "").replace(prefix, "") == hash.substring(1)) {
+                        if (found) {
+                            return
+                        }
+                        var index = $('ul.nav-list').index($(this).parent().parent().parent().parent())
+                        $(".sidebar ul.nav").removeClass("showul").eq(index).addClass("showul")
+                        $(this).parent().parent().parent().find('>a').click();
+                        $("ul.nav-list li.active").removeClass('active');
+                        $(this).parent().addClass("active");
+                        $(".navbar-menu>ul>li").eq(index).addClass('nav-active');
+                        $(this).click();
+                        found = true
+                    }
+                });
+            }
+            $(".navbar-menu a").click(function(index) {
+                $(".navbar-menu>ul>li").not($(this).parent()).removeClass('nav-active');
+                $(this).parent().addClass('nav-active');
+                $(".sidebar ul.nav").removeClass("showul").eq($(".navbar-menu a").index(this)).addClass("showul")
+            });
+        });
+        setTimeout(function() {
+            $("#sidebar").addClass("sidebar-fixed");
+            $("#breadcrumbs").addClass("breadcrumbs-fixed");
+        }, 1000);
+    </script>
+</body>
+
+</html>

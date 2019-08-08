@@ -1,0 +1,26 @@
+<div id="user-home" class="" style="height:70px;">
+    <header class="navbar custom-navbar">
+        <div class="logo pull-left">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+            </div>
+            <a href="/user/index">{{config "String" "sys.fullname" ""}}</a>
+        </div>
+        <nav class="main-menu pull-right">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="smooth-scroll"><a target="main" href="/tunnel/mode"><span class="label label-danger">添加隧道</span></a></li>
+                    <li class="smooth-scroll" style="text-transform:none;"><a><span class="label label-primary">Hi：{{.userValue.username}} </span></a></li>
+                    <li class="smooth-scroll"><a class="theme-color" href="/">首页</a></li>
+                    <!--<li class="smooth-scroll"><a class="theme-color" href="/user/index">个人中心</a></li>-->
+                    <li class="smooth-scroll"><a class="theme-color" href="/author/logout">退出</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</div>

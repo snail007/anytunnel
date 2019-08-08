@@ -1,0 +1,44 @@
+<script src="/static/style/plugins/jquery.form.min.js"></script>
+<script src="/static/style/common/form.js"></script>
+{{$regions:=.regions}}
+<form method="post" class="ajaxform" action="/web/role/regions" ajaxPre="checkForm">
+    <input type="hidden" name="role_id" value="{{.roleId}}">
+    <div class="panel panel-default" style="margin-bottom:80px;">
+        <div class="panel-body">
+            {{range $region := $regions}} {{if eq $region.parent_id "0"}}
+            <ul class="list-group w240 inline-group">
+                <li class="list-group-item">
+                    <strong><input type="checkbox" class="region-group" style="margin-bottom:3px;" />
+                        {{$region.name}}</strong> <span class="pull-right"><a name='edit' href='/web/region/edit?region_id={{$region.region_id}}'>改</a> | <a data-toggle="confirmation" data-placement="bottom" data-title="确定删除吗?" href='/web/region/delete?region_id={{$region.region_id}}'>删</a></span>
+                </li>
+                {{range $item := $regions}} {{if eq $item.parent_id $region.region_id}}
+                <li class="list-group-item">
+                    <input type="checkbox" class="region-id" {{range $k,$v:=$.regionIds}} {{if eq $v $item.region_id}}checked="checked" {{end}} {{end}} name="region-ids" style="margin-bottom:3px;" value="{{$item.region_id}}" /> {{$item.name}}
+
+                    <span class="pull-right"><a name='edit' href='/web/region/edit?region_id={{$item.region_id}}'>改</a> | <a data-toggle="confirmation" data-placement="bottom" data-title="确定删除吗?" href='/web/region/delete?region_id={{$item.region_id}}'>删</a></span></li>
+                {{end}} {{end}}
+            </ul>
+            {{end}} {{end}}
+            <div style="width:90%;text-align:center;"><input type="submit" class="btn btn-primary save" value="保存"></div>
+        </div>
+    </div>
+</form>
+<script>
+    function checkForm() {
+        var regionIds = [];
+        $(".region-id").each(function() {
+            if (this.checked) {
+                regionIds.push(this.value)
+            }
+        });
+        return true
+    }
+    $(".region-group").click(function() {
+        $(this).parent().parent().parent().find(".region-id").prop("checked", this.checked);
+    });
+    $(".region-group").each(function() {
+        if ($(this).parent().parent().parent().find(".region-id").not(":checked").length == 0) {
+            $(this).prop("checked", true)
+        }
+    });
+</script>

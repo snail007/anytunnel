@@ -1,0 +1,65 @@
+{{$onlines:=.onlines}}
+
+<div class="panel panel-default" style="margin-bottom:80px;">
+    <form action="/web/online/list" method="get">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <input class="form-control" name="cs" type="hidden" value="{{.cs}}">
+
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" name="type">
+                            <option value="cluster_id">ClusterID</option>
+                            <option value="user_id">UserID</option>
+                            <option value="cs_id">{{if eq $.cs "server"}}ServerID{{else}}ClientID{{end}}</option>
+                            <option value="cs_ip">上线IP</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" name="keyword" type="text" placeholder="">
+                </div>
+                <div class="col-md-1">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center w5p">ID</th>
+                    <th class="center w5p">UserID</th>
+                    <th class="center w5p">ClusterID</th>
+                    <th class="center w5p">上线IP</th>
+                    <th class="center w10p">{{if eq $.cs "server"}}ServerID{{else}}ClientID{{end}}</th>
+                    <!-- <th class="center w10p">类型</th> -->
+                    <th class="center w15p">上线时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range $online := .onlines}}
+                <tr>
+                    <td class="center">{{$online.online_id}}</td>
+                    <td class="center">{{$online.user_id}}{{if eq $online.user_id "0"}}<small> (系统)</small>{{end}}</td>
+                    <td class="center">{{$online.cluster_id}}</td>
+                    <td class="center">{{$online.cs_ip}}</td>
+                    <td class="center">{{$online.cs_id}}</td>
+                    <!-- <td class="center">{{$online.cs_type}}</td> -->
+                    <td class="center">
+                        {{dateFormat $online.create_time "Y-m-d H:i:s"}}
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer pagebar">
+        <div class="pull-right">{{str2html .page}}</div>
+        <div style="clear:both;"></div>
+    </div>
+</div>

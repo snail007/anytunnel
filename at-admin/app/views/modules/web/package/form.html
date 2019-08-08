@@ -1,0 +1,86 @@
+<style>
+    .forx {
+        display: none;
+    }
+</style>
+
+{{$package:=.package}}
+<div class="panel panel-default" style="padding-bottom:200px;">
+    <div class="panel-body">
+        <form class="form-horizontal ajaxform" ajaxSuccess="success" ajaxAlways="always" method="post" action="/web/package/{{.action}}">
+            <input type="hidden" name="package_id" value="{{$package.package_id}}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>流量包来源</label>
+                <div class="col-sm-4">
+                    <input type="text" name="comment" class="form-control" value="{{$package.comment}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * 请将汉字限制在10个以内</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>UserID</label>
+                <div class="col-sm-4">
+                    <input type="text" name="user_id" class="form-control" value="{{$package.user_id}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>流量剩余字节数</label>
+                <div class="col-sm-4">
+                    <input type="text" name="bytes_left" class="form-control bytes_left" value="{{$package.bytes_left}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * <span class="bytes_left_human"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>生效时间</label>
+                <div class="col-sm-4">
+                    <input type="text" name="start_time" class="form-control datepicker" value='{{if $package.start_time}}{{dateFormat $package.start_time "Y-m-d"}}{{end}}'>
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>失效时间</label>
+                <div class="col-sm-4">
+                    <input type="text" name="end_time" class="form-control datepicker" value='{{if $package.end_time}}{{dateFormat $package.end_time "Y-m-d"}}{{end}}'>
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(function() {
+        $('.datepicker').datepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+        });
+        var format = function() {
+            var val = $(".bytes_left").val();
+            $(".bytes_left_human").html(humanFileSize(val ? parseInt(val) : 0));
+        };
+        $(".bytes_left").keyup(function() {
+            format();
+        });
+        format();
+    });
+
+    function humanFileSize(size) {
+        var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)));
+        i = size > 0 ? i : 0;
+        return (size / Math.pow(1024, i)).toFixed(2) * 1 + ['B', 'KB', 'MB', 'GB', 'TB'][i];
+    }
+</script>

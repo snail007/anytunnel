@@ -1,0 +1,91 @@
+<style>
+    .forx {
+        display: none;
+    }
+</style>
+{{$role:=.role}}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal ajaxform" ajaxSuccess="success" ajaxAlways="always" method="post" action="/web/role/{{.action}}">
+            <input type="hidden" name="role_id" value="{{$role.role_id}}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>角色名称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control" value="{{$role.name}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * 请将汉字限制在15个以内</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>带宽</label>
+                <div class="col-sm-4">
+                    <input type="text" name="bandwidth" class="form-control bytes_limit" value="{{$role.bandwidth}}">
+
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * 带宽限制,单位字节byte,0不限制</span>
+                    <br>
+                    <span class="bytes_limit_human"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="text-danger"> * </span>Server登录区域</label>
+                <div class="col-md-4">
+                    <select class="form-control" name="server_area" size="1" default="{{$role.server_area}}">
+                            <option value="all">全部</option>    
+                            <option value="china">中国</option>
+                            <option value="foreign">国外</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="text-danger"> * </span>Client登录区域</label>
+                <div class="col-md-4">
+                    <select id="roles_selector" class="form-control" name="client_area" size="1" default="{{$role.client_area}}">
+                            <option value="all">全部</option>
+                            <option value="china">中国</option>
+                            <option value="foreign">国外</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="text-danger"> * </span>隧道模式</label>
+                <div class="col-md-4">
+                    <label for="tunnel_mode01">普通
+                        <input {{if $.tunnel_mode_arr}} {{range $v:=$.tunnel_mode_arr}} {{if eq $v "0"}}checked{{end}} {{end}} {{end}} type="checkbox" id="tunnel_mode01" value="0" class="form-control" name="tunnel_mode">
+                    </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="tunnel_mode02">特殊
+                            <input  {{if $.tunnel_mode_arr}} {{range $v:=$.tunnel_mode_arr}} {{if eq $v "2"}}checked{{end}} {{end}} {{end}} type="checkbox" id="tunnel_mode02" value="2" class="form-control" name="tunnel_mode">
+                    </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="tunnel_mode03">高级
+                            <input  {{if $.tunnel_mode_arr}} {{range $v:=$.tunnel_mode_arr}} {{if eq $v "1"}}checked{{end}} {{end}} {{end}} type="checkbox" id="tunnel_mode03" value="1" class="form-control" name="tunnel_mode">
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(function() {
+        var format = function() {
+            var val = $(".bytes_limit").val();
+            $(".bytes_limit_human").html(humanFileSize(val ? parseInt(val) : 0));
+        };
+        $(".bytes_limit").keyup(function() {
+            format();
+        });
+        format();
+    });
+
+    function humanFileSize(size) {
+        var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)));
+        i = size > 0 ? i : 0;
+        return (size / Math.pow(1024, i)).toFixed(2) * 1 + ['B', 'KB', 'MB', 'GB', 'TB'][i];
+    }
+</script>

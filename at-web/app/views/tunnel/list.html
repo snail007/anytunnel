@@ -1,0 +1,79 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">
+                <a href="/tunnel/mode" class="btn btn-primary">添加隧道</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="w13p">名称</th>
+                <th class="w8p">模式</th>
+                <th class="w8p">Server Ip</th>
+                <th class="w8p">Server Port</th>
+                <th class="w8p">Client Ip</th>
+                <th class="w8p">Client Port</th>
+                <th class="w8p">状态</th>
+                <th class="w8p">开启</th>
+                <th class="w13p">创建时间</th>
+                <th class="w13p">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{range $key, $tunnelValue := .tunnelValues}}
+            <tr>
+                <td>{{$tunnelValue.name}}</td>
+                <td>
+                    {{if eq $tunnelValue.mode "0"}}
+                    基础模式
+                    {{else if eq $tunnelValue.mode "1"}}
+                    高级模式
+                    {{else}}
+                    特殊模式
+                    {{end}}
+                </td>
+                <td class="center">{{$tunnelValue.server_listen_ip}}</td>
+                <td class="center">{{$tunnelValue.server_listen_port}}</td>
+                <td class="center">{{$tunnelValue.client_local_host}}</td>
+                <td class="center">{{$tunnelValue.client_local_port}}</td>
+                <td class="center">{{if eq $tunnelValue.status "0"}}
+                    <label class="label label-danger">异常</label>
+                    {{else}}
+                    <label class="label label-success">正常</label>
+                    {{end}}
+                </td>
+                <td class="center">{{if eq $tunnelValue.is_open "0"}}
+                    <label class="label label-danger">未开启</label>
+                    {{else}}
+                    <label class="label label-success">已开启</label>
+                    {{end}}
+                </td>
+                <td class="center">{{dateFormat $tunnelValue.create_time "Y-m-d H:i:s"}}</td>
+                <td class="center">
+                    {{if eq $tunnelValue.is_open "0"}}
+                    <a onclick="Common.confirm('确定要开启隧道吗？', '/tunnel/open?tunnel_id={{$tunnelValue.tunnel_id}}')" class="glyphicon glyphicon-ok-circle">开启</a>
+                    {{else}}
+                    <a onclick="Common.confirm('确定要关闭隧道吗？', '/tunnel/close?tunnel_id={{$tunnelValue.tunnel_id}}')" class="glyphicon glyphicon-ban-circle">关闭</a>
+                    {{end}}
+                    {{if eq $tunnelValue.status "0"}}
+                    {{if eq $tunnelValue.is_open "1"}}
+                    <a onclick="Common.confirm('确定要重启隧道吗？', '/tunnel/refresh?tunnel_id={{$tunnelValue.tunnel_id}}')" class="glyphicon glyphicon-refresh">重启</a>
+                    {{end}}
+                    {{end}}
+                    <a onclick="Common.confirm('确定要删除隧道吗？', '/tunnel/delete?tunnel_id={{$tunnelValue.tunnel_id}}')" class="glyphicon glyphicon-remove">删除</a>
+                </td>
+            </tr>
+            {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-8 m-pagination" id="paginator">
+            </div>
+        </div>
+    </div>
+</div>

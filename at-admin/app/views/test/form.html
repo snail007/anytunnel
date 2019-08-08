@@ -1,0 +1,182 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-body" style="padding: 15px 0;">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="javascript:;">Tab</a></li>
+                </ul>
+            </div>
+            <div class="panel-body" style="padding-left: 9px;">
+                <div class="row">
+                    <form>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">选择节点</span>
+                                <select class="form-control">
+                                    <option value="ad" >jadhgjashdasgdsjagdj</option>
+                                    <option value="da" >jadhgjashdasgdsjagdj</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" name="add_message" data-link="/message/add?node_id={{.node_id}}"><i class="glyphicon glyphicon-plus"></i> 添加消息 </button>
+                                <button type="button" class="btn btn-success" name="test_message" data-link="/message/test?node_id={{.node_id}}" style="margin-left: 5px;"><i class="glyphicon glyphicon-send"></i> 测试消息 </button>
+                                <button onclick="Common.confirm('确定要重启该节点吗？', '/node/reload?node_id={{.node_id}}')" type="button" class="btn btn-danger" style="margin-left: 5px;"><i class="glyphicon glyphicon-refresh"></i> 重启节点 </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel-body" style="padding-left: 9px;">
+                <div class="row">
+                    <form action="/log/list" method="post">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">节点</span>
+                                <select class="form-control" name="node_id">
+                                    <option value="1">dlasdljalks</option>
+                                    <option value="1">dlasdljalks</option>
+                                    <option value="1">dlasdljalks</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">日志类型</span>
+                                <select class="form-control" name="type">
+                                    <option value="errror" >ERROR</option>
+                                    <option value="info" >INFO</option>
+                                    <option value="debug">DEBUG</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input class="form-control" name="keyword" type="text" value="adas" placeholder="关键字">
+                                <span class="input-group-btn">
+                                  <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" name="log_download" data-link="/log/download?node_id={{.node_id}}"><i class="glyphicon glyphicon-download-alt"></i> 下载日志 </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="post" action="" onsubmit="return false">
+                    <input type="hidden" name="node_id" value="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><span class="text-danger"> * </span>表单</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="url" class="form-control" placeholder="消费接口" required>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="text-danger"> * 请将汉字限制在15个以内</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><span class="text-danger"> * </span>下拉框</label>
+                        <div class="col-sm-6">
+                            <select name="message" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="text-danger"> * 请将汉字限制在15个以内</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><span class="text-danger"> * </span>单选框</label>
+                        <div class="col-sm-4">
+                            <label class="radio-inline">
+                                <input type="radio" name="check_code" value="1" checked="checked">
+                                是
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="check_code" value="0">
+                                否
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><span class="text-danger"> * </span>复选框</label>
+                        <div class="col-sm-4">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="check_code" value="1" checked="checked">
+                                是
+                            </label>
+                            <label class="radio-inline">
+                                <input type="checkbox" name="check_code" value="0">
+                                否
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><span class="text-danger"> * </span> textarea </label>
+                        <div class="col-sm-6">
+                            <textarea name="data" class="form-control" rows="6"></textarea><br/>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="text-danger"> * 数据格式如：name=pppp&id=16&email=ada@123.com </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="comment" class="form-control" placeholder="备注" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" name="submit" onclick="Form.ajaxSubmit(this.form, true)" class="btn btn-success">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="w10p">消息名称</th>
+                            <th class="w8p">交换器模式</th>
+                            <th>消费接口</th>
+                            <th class="w80">RouteKey</th>
+                            <th class="w90">状态</th>
+                            <th class="w60">超时</th>
+                            <th class="w200">备注</th>
+                            <th class="w100">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>ad</td>
+                            <td>da</td>
+                            <td>da</td>
+                            <td class="w80">da</td>
+                            <td class="center w90 consumer_status">
+                                <label class="text-info">waiting</label>
+                            </td>
+                            <td class="w60">ad</td>
+                            <td class="w200">ad</td>
+                            <td class="w100 center">
+                                <a name="edit" class="glyphicon glyphicon-edit" data-link="/consumer/edit?node_id=1">修改</a>
+                                <a onclick="Common.confirm('确定要删除吗？', '/consumer/delete?node_id=')" class="remove glyphicon glyphicon-trash">删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer"></div>
+            </div>
+        </div>
+    </div>
+</div>

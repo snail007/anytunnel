@@ -1,0 +1,67 @@
+ {{$ip_lists:=.ip_lists}}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form action="/web/IpList/list" method="get">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3">
+                        <select class="form-control" name="type">
+                                    <option value="ip">IP</option>
+                                    <option value="cs_type">类型[server|client]</option>
+                                    <option value="is_forbidden">访问控制[0禁止|1允许]</option>
+                            </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control" name="id" type="text" placeholder="">
+                    </div>
+                    <div class="col-md-1">
+                        <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center w5p">ID</th>
+                    <th class="center w15p">IP</th>
+                    <th class="center w10p">类型</th>
+                    <th class="center w15p">访问控制</th>
+                    <th class="center w15p">创建时间</th>
+                    <th class="center w15p">更新时间</th>
+                    <th class="center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range $ip_list := $ip_lists}}
+                <tr>
+                    <td class="center">{{$ip_list.ip_list_id}}</td>
+                    <td class="center">{{$ip_list.ip}}</td>
+                    <td class="center">{{$ip_list.cs_type}}</td>
+                    <td class="center">{{if eq $ip_list.is_forbidden "1"}}
+                        <span class="label label-warning">禁止</span> {{else}}
+                        <span class="label label-success">允许</span> {{end}}
+                    </td>
+                    <td class="center">
+                        {{dateFormat $ip_list.create_time "Y-m-d H:i:s"}}
+                    </td>
+                    <td class="center">
+                        {{dateFormat $ip_list.update_time "Y-m-d H:i:s"}}
+                    </td>
+                    <td class="center">
+                        <a name="edit" href="/web/IpList/edit?ip_list_id={{$ip_list.ip_list_id}}"><i class="glyphicon glyphicon-pencil"> </i>修改</a>
+                        <a name="delete" data-toggle="confirmation" data-placement="left" data-title="确定删除吗?" href="/web/IpList/delete?ip_list_id={{$ip_list.ip_list_id}}"><i class="glyphicon glyphicon-remove"> </i>删除</a>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>

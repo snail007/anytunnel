@@ -1,0 +1,36 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="/user/profile">修改资料</a></li>
+            <li><a href="/user/password">修改密码</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" method="post" action="/user/save">
+            <input type="hidden" name="user_id" value="{{.userValue.user_id}}">
+            <div class="form-group">
+                <label class="col-sm-1 control-label"><span class="text-danger"> * </span>用户名</label>
+                <div class="col-sm-4">
+                    <input type="text" name="username" class="form-control" value="{{.userValue.username}}" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label"><span class="text-danger"> * </span>邮箱</label>
+                <div class="col-sm-4">
+                    <input type="text" name="email" class="form-control" value="{{.userValue.email}}" placeholder="请输入邮箱" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label"><span class="text-danger"></span>昵称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="nickname" class="form-control" value="{{.userValue.nickname}}" placeholder="请输入昵称">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+                    <button type="button" name="submit"  onclick="Form.ajaxSubmit(this.form, false)" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

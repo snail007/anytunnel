@@ -1,0 +1,103 @@
+<div class="panel panel-default">
+    <br>
+    <div class="panel-body">
+        <form class="form-horizontal" method="post" action="/tunnel/save">
+            <input type="hidden" name="tunnel_id" value="">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>名称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control" value="" placeholder="请输入隧道名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span> 模式 </label>
+                <div class="col-sm-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="mode" value="0" checked="checked">基本
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="mode" value="1">高级
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span> Server</label>
+                <div class="col-sm-4">
+                    <select name="server_id" class="form-control">
+                        {{range $serverValue := .serverValues}}
+                        <option value="{{$serverValue.server_id}}">{{$serverValue.name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>Server绑定IP</label>
+                <div class="col-sm-4">
+                    <input type="text" name="server_listen_ip" class="form-control" value="" placeholder="请输入Server绑定IP">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>Server监听端口</label>
+                <div class="col-sm-4">
+                    <input type="text" name="server_listen_port" class="form-control" value="" placeholder="请输入Server监听端口">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span> Client</label>
+                <div class="col-sm-4">
+                    <select name="" class="form-control">
+                        {{range $clientValue := .clientValues}}
+                        <option value="{{$clientValue.client_id}}">{{$clientValue.name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>Client绑定IP</label>
+                <div class="col-sm-4">
+                    <input type="text" name="client_local_host" class="form-control" value="" placeholder="请输入Server绑定IP">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>Client监听端口</label>
+                <div class="col-sm-4">
+                    <input type="text" name="client_local_port" class="form-control" value="" placeholder="请输入Server监听端口">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span> 选择节点 </label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" name="cluster_name" class="form-control" aria-describedby="cluster-input" readonly>
+                        <input type="hidden" name="cluster_id" class="form-control" value="">
+                        <span class="input-group-addon" id="cluster-input">
+                            <a class="glyphicon glyphicon-th-list" name="select_cluster" data-link="/tunnel/cluster"></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" name="submit"  onclick="Form.ajaxSubmit(this.form, false)" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $("a[name='select_cluster']").bind('click', function() {
+        var clusterId = $("input[name='cluster_id']").val();
+        $.fancybox({
+            padding: 5,
+            minWidth : 800,
+            minHeight : 520,
+            width : '95%',
+            height : '70%',
+            autoSize : false,
+            type : 'iframe',
+            href : $(this).attr('data-link') + "?cluster_id=" + clusterId,
+            afterClose: function (current, previous) {
+            }
+        });
+    });
+</script>

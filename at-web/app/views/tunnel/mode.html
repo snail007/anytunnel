@@ -1,0 +1,60 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+            <span class="label label-danger">第一步：</span> 请选择模式
+        </h4>
+    </div>
+    <div class="panel-body">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img alt="100%x200" src="/static/images/tunnel/base.png" data-holder-rendered="true" style="background-color: #9d9d9d ;height: 200px; width: 100%; display: block;" >
+                <div class="caption" style="height: 200px;">
+                    <h3>基本模式</h3>
+                    <p>基本模式基本模式基本模式基本模式基本模式基本模式基本模式基本模式基本模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式</p>
+                    <p>
+                        {{if eq .modeBase "1"}}
+                        <a href="/tunnel/cluster?mode=0" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-hand-right"></span> 选择</a>
+                        {{else}}
+                        <a href="javascript:;" class="btn btn-primary" role="button" disabled="disabled"><span class="glyphicon glyphicon-remove"></span> 选择</a>
+                        <span class="text-danger">没有权限</span>
+                        {{end}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTVlNTE1YjY4YTQgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMnB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWU1MTViNjhhNCI+PHJlY3Qgd2lkdGg9IjI0MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI4OS44NTkzNzUiIHk9IjEwNS4xIj4yNDJ4MjAwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption" style="height: 200px;">
+                    <h3>高级模式</h3>
+                    <p>高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式高级模式</p>
+                    <p>
+                        {{if eq .modeSenior "1"}}
+                        <a href="/tunnel/cluster?mode=1" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-hand-right"></span> 选择</a>
+                        {{else}}
+                        <a href="javascript:;" class="btn btn-primary" role="button" disabled="disabled">选择</a>
+                        <span class="text-danger">没有权限</span>
+                        {{end}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTVlNTE1YjMwMGMgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMnB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWU1MTViMzAwYyI+PHJlY3Qgd2lkdGg9IjI0MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI4OS44NTkzNzUiIHk9IjEwNS4xIj4yNDJ4MjAwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption" style="height: 200px;">
+                    <h3>特殊模式</h3>
+                    <p>特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式特殊模式</p>
+                    <p>
+                        {{if eq .modeSpecial "1"}}
+                        <a href="/tunnel/cluster?mode=2" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-hand-right"></span> 选择</a>
+                        {{else}}
+                        <a href="javascript:;" class="btn btn-primary" role="button" disabled="disabled">选择</a>
+                        <span class="text-danger">没有权限</span>
+                        {{end}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<style>
+    #user-home header {
+        border: none;
+        border-radius: 0;
+    }
+    
+    .nav-list {
+        border: none;
+    }
+    
+    ul.navbar {
+        padding: 0;
+        padding-top: 10px;
+        background-color: rgba(10, 10, 10, 0.8);
+    }
+    
+    ul.navbar li {
+        list-style: none;
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        /* text-align: center; */
+    }
+    
+    ul.navbar li a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        text-decoration: none;
+        color: whitesmoke;
+    }
+    
+    ul.navbar li a i {
+        margin-right: 10px;
+        margin-left: 40px;
+    }
+    
+    ul.navbar li a:hover {
+        background-color: rgba(10, 10, 10, 0.6);
+        color: whitesmoke;
+    }
+    
+    .navbar .logo {
+        margin-left: 15px;
+    }
+    
+    .left-menu {
+        width: 180px;
+    }
+    
+    .right-content {
+        padding-left: 190px;
+        padding-top: 10px;
+        padding-right: 10px;
+        min-height: 100px;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-lg-2 navbar-menu left-menu">
+            <ul class="navbar nav-list navbar-default navbar-fixed-side">
+                <li>
+                    <a href="/user/profile"><i class="fa fa-user-circle"></i>我的资料</a>
+                </li>
+                <li>
+                    <a href="/client/list"><i class="fa fa-exchange"></i>我的Client</a>
+                </li>
+                <li>
+                    <a href="/server/list"><i class="fa fa-server"></i>我的Server</a>
+                </li>
+                <li>
+                    <a href="/tunnel/list"><i class="fa fa-retweet"></i>我的隧道</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right-content">
+            <iframe id="main" name="main" src="/user/welcome" scrolling="yes" style="overflow-y:auto;border:none;" frameborder="yes" width="100%" height="100%"></iframe>
+        </div>
+    </div>
+</div>
+<script>
+    setInterval(function() {
+        var mainheight = $("#main").contents().find("body").height();
+        var minHeight = $(window).height() - 90;
+        if (mainheight < minHeight) {
+            mainheight = minHeight
+        }
+        $("#main").height(mainheight);
+        var src = $("#main").attr("src");
+        if(src == "/author/login") {
+            location.href = src;
+        }
+    }, 200);
+    $('ul.nav-list a').not('.dropdown-toggle').click(function() {
+        $('#main').attr('src', this.href);
+        return false
+    });
+</script>

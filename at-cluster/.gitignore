@@ -1,0 +1,16 @@
+at-cluster
+at-cluster.exe
+at-cluster.exe~
+.vscode
+.vscode/*
+*.exe
+*.exe~
+.DS_Store
+log
+log/*
+.*
+data
+tools/api/api
+tools/reporter/reporter
+tools/statistics/statistics
+!.gitignore

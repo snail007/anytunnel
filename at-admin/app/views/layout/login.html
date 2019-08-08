@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{.title}}</title>
+    <link rel="shortcut icon" href="/static/index/favicon2.ico">
+
+    <style>
+        @font-face {
+            font-family: 'Exo';
+            font-style: normal;
+            font-weight: 200;
+            src: local('Exo ExtraLight'), local('Exo-ExtraLight'), url(/static/index/D3Kro_SQxlEekR5WQVBxG-vvDin1pK8aKteLpeZ5c0A.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+        }
+        
+        @font-face {
+            font-family: 'Exo';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Exo Regular'), local('Exo-Regular'), url(/static/index/7V_Hf8uqhTnCHU5pdwV73A.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            color: #fff;
+            font-family: Arial;
+            font-size: 12px;
+        }
+        
+        .body {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 0px;
+            bottom: 0px;
+            width: auto;
+            height: auto;
+            background-image: url(/static/index/login-bg{{randInt 1 3}}.jpg);
+            background-size: cover;
+            -webkit-filter: blur(5px);
+            z-index: 0;
+        }
+        
+        .grad {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 0px;
+            bottom: 0px;
+            width: auto;
+            height: auto;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.65)));
+            /* Chrome,Safari4+ */
+            z-index: 1;
+            opacity: 0.7;
+        }
+        
+        .header {
+            position: absolute;
+            top: calc(50% - 35px);
+            left: calc(50% - 455px);
+            z-index: 2;
+        }
+        
+        .header div {
+            float: left;
+            color: #fff;
+            font-family: 'Exo', sans-serif;
+            font-size: 35px;
+            font-weight: 200;
+        }
+        
+        .header div span {
+            color: #5379fa !important;
+        }
+        
+        .login {
+            position: absolute;
+            top: calc(50% - 75px);
+            left: calc(50% - 50px);
+            height: 150px;
+            width: 350px;
+            padding: 10px;
+            z-index: 2;
+        }
+        
+        .login input[type=text] {
+            width: 250px;
+            height: 30px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+            color: #fff;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 4px;
+        }
+        
+        .login input[type=password] {
+            width: 250px;
+            height: 30px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+            color: #fff;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 4px;
+            margin-top: 10px;
+        }
+        
+        .login input[type=submit] {
+            width: 260px;
+            height: 35px;
+            background: #fff;
+            border: 1px solid #fff;
+            cursor: pointer;
+            border-radius: 2px;
+            color: #a18d6c;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 6px;
+            margin-top: 10px;
+        }
+        
+        .login input[type=submit]:hover {
+            opacity: 0.8;
+        }
+        
+        .login input[type=submit]:active {
+            opacity: 0.6;
+        }
+        
+        .login input[type=text]:focus {
+            outline: none;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+        
+        .login input[type=password]:focus {
+            outline: none;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+        
+        .login input[type=submit] {
+            width: 252px;
+        }
+        
+         ::-webkit-input-placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+         ::-moz-input-placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .login .captcha {
+            border: none;
+            width: 80px;
+            height: 28px;
+            margin-top: -2px;
+        }
+        
+        .login input[type=text].captcha-value {
+            margin: 10px 10px 0 0;
+            width: 160px;
+        }
+    </style>
+
+    <script src="/static/index/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+    <div class="body"></div>
+    <div class="grad"></div>
+    <div class="header">
+        <div>{{config "String" "sys.name" "" }}<span>Admin</span></div>
+    </div>
+    <br>
+    <form action="/login/login" class="ajaxform" ajaxSuccess="ajaxSuccess">
+        <div class="login">
+            <input type="text" placeholder="用户名" name="username" value="root"><br>
+            <input type="password" placeholder="密码" name="password" value="123abc"><br>
+            <input type="text" placeholder="验证码" name="captcha" class="captcha-value" value=""><img class="captcha" src="/login/captcha" /><br>
+            <input type="submit" value="Login">
+        </div>
+    </form>
+
+
+    <script src='/static/index/jquery-2.1.4.min.js'></script>
+    <script src="/static/style/plugins/notify.min.js"></script>
+    <script src="/static/style/plugins/jquery.form.min.js"></script>
+    <script src="/static/style/plugins/icon/icon-selector.js"></script>
+    <link rel="stylesheet" href="/static/style/plugins/icon/icon-selector.css">
+    <script src="/static/style/common/form.js"></script>
+    <script>
+        if (top != self) {
+            top.location = location;
+        }
+        $(".captcha").click(function() {
+            refreshCode();
+        });
+
+        function ajaxSuccess(data) {
+            if (!data.code) {
+                refreshCode();
+            }
+        }
+
+        function refreshCode() {
+            $(".captcha-value").val("")
+            $(".captcha").attr("src", "/login/captcha?_=" + (Math.random() + "").substring(2))
+        }
+    </script>
+</body>
+
+</html>

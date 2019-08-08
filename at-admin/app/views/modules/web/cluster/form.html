@@ -1,0 +1,51 @@
+<style>
+    .forx {
+        display: none;
+    }
+</style>
+{{$cluster:=.cluster}} {{$regions:=.regions}}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal ajaxform" ajaxSuccess="success" ajaxAlways="always" method="post" action="/web/cluster/{{.action}}">
+            <input type="hidden" name="cluster_id" value="{{$cluster.cluster_id}}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>名称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control" value="{{$cluster.name}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * 请将汉字限制在15个以内</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>IP(内)</label>
+                <div class="col-sm-4">
+                    <input type="text" name="ip" class="form-control" value="{{$cluster.ip}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>区域</label>
+                <div class="col-sm-4">
+                    <select name="region_id" class="form-control" default="{{$cluster.region_id}}">
+                            <option value="">请选择区域</option>                            
+                            {{range $k,$item := $regions}}
+                            <option value="{{$item.region_id}}">{{$item.parent}} -> {{$item.name}}</option>
+                            {{end}}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

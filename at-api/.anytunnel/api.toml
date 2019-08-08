@@ -1,0 +1,32 @@
+[port]
+ip = "0.0.0.0"
+https = 37081
+
+[log]
+dir = "log"
+level = ["info","error","debug"]
+#access log on or off
+access = true
+#log post data on or off
+post = false
+#level
+console-level = "debug"
+#log file max size(bytes) for rotate
+fileMaxSize = 102400000
+#log file max count for rotate to remain
+maxCount = 3
+
+[database]
+    [database.base]
+    host = "127.0.0.1"
+    port = 3306
+    dbName = "anytunnel_base"
+    user = "user"
+    pass = "admin"
+    maxIdle = 50
+    maxConn = 300
+    dbTablePrefix = "at_"
+[uri]
+tunnel_open = "https://127.0.0.1:37080/port/open"
+tunnel_close = "https://127.0.0.1:37080/port/close"
+tunnel_status = "https://127.0.0.1:37080/port/status"

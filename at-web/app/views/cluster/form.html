@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+    <br>
+    <div class="panel-body">
+        <form class="form-horizontal ajaxform" ajaxSuccess="success" ajaxAlways="always" method="post" action="">
+            <input type="hidden" name="role_id" value="">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>名称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control" value="" placeholder="client 名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>server_ip</label>
+                <div class="col-sm-4">
+                    <input type="text" name="server_ip" class="form-control" value="" placeholder="请输入server_ip">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>cluster节点</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" name="cluster_name" class="form-control" value="" aria-describedby="cluster" placeholder="请选择cluster节点" readonly>
+                        <span class="input-group-addon" id="cluster"><a name="select_cluster" data-link="/cs/cluster" class="glyphicon glyphicon-th-list"></a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $("a[name='select_cluster']").bind('click', function() {
+        $.fancybox({
+            padding: 5,
+            minWidth : 800,
+            minHeight : 520,
+            width : '95%',
+            height : '60%',
+            autoSize : false,
+            type : 'iframe',
+            href : $(this).attr('data-link')
+        });
+    });
+</script>

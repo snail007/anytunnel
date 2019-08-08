@@ -1,0 +1,55 @@
+{{$regions:=.regions}} {{$clusters:=.clusters}}
+<div class="panel panel-default">
+    <div class="panel-body">
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center w5p">ID</th>
+                    <th class="center w15p">区域</th>
+                    <th class="center w10p">名称</th>
+                    <th class="center w10p">IP</th>
+                    <th class="center w8p">SYSCONN</th>
+                    <th class="center w5p">CONN</th>
+                    <th class="center w7p">网速</th>
+                    <th class="center w15p">更新时间</th>
+                    <th class="center w5p">状态</th>
+                    <th class="center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range $k,$region:=$regions}} {{range $cluster := $clusters}} {{if eq $region.region_id $cluster.region_id}}
+                <tr>
+                    <td class="center">{{$cluster.cluster_id}}</td>
+                    <td class="center">
+                        {{$region.parent}}:{{$region.name}}
+                    </td>
+                    <td class="center">{{$cluster.name}}</td>
+                    <td class="center">{{$cluster.ip}}</td>
+                    <td class="center">{{$cluster.system_conn_number}}</td>
+                    <td class="center">{{$cluster.tunnel_conn_number}}</td>
+                    <td class="center">{{$cluster.bandwidth_human}}/s</td>
+                    <td class="center">
+                        {{dateFormat $cluster.update_time "Y-m-d H:i:s"}}
+                    </td>
+                    <td class="center">
+                        {{if eq $cluster.is_disable "0"}}
+                        <span class="label label-success">正常</span> {{else}}
+                        <span class="label label-danger">禁用</span> {{end}}
+                    </td>
+                    <td class="center">
+                        <a name="edit" href="/web/cluster/statistic?cluster_id={{$cluster.cluster_id}}"><i class="glyphicon glyphicon-pencil"> </i>统计</a>
+                        <a name="edit" href="/web/cluster/edit?cluster_id={{$cluster.cluster_id}}"><i class="glyphicon glyphicon-pencil"> </i>修改</a>
+                        <a name="delete" data-toggle="confirmation" data-placement="left" data-title="确定删除吗?" href="/web/cluster/delete?cluster_id={{$cluster.cluster_id}}"><i class="glyphicon glyphicon-remove"> </i>删除</a> {{if eq $cluster.is_disable "0"}}
+                        <a name="forbidden" data-toggle="confirmation" data-placement="left" data-title="确定禁用吗?" href="/web/cluster/forbidden?cluster_id={{$cluster.cluster_id}}"><i class="fa fa-ban"> </i>禁用</a> {{else}}
+                        <a name="review" data-toggle="confirmation" data-placement="left" data-title="确定恢复吗?" href="/web/cluster/review?cluster_id={{$cluster.cluster_id}}"><i class="glyphicon glyphicon-ok"> </i>恢复</a> {{end}}
+                    </td>
+                </tr>
+                {{end}} {{end}} {{end}}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>

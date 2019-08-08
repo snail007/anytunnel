@@ -1,0 +1,86 @@
+<script src="/static/style/plugins/chart.js"></script>
+<div class="panel panel-default container">
+    <h3>统计情况</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div style="width:300px;height:300px;">
+                <canvas id="online"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div style="width:300px;height:300px;">
+                <canvas id="traffic"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var onlineCfg = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [0, 0, 0, ],
+                backgroundColor: ["#999", "#123", "#456", ],
+            }],
+            labels: ["client", "server", "cluster", ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "在线情况"
+            },
+            responsive: true
+        }
+    };
+    var onlineChart = new Chart($("#online"), onlineCfg);
+
+    var trafficCfg = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [0, 0],
+                backgroundColor: ["#289", "#006621"],
+            }],
+            labels: ["已用流量", "剩余流量"]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: "流量包使用情况"
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, chart) {
+                        console.log(tooltipItem, chart)
+                        var label = chart.labels[tooltipItem.index]
+                        return label + ":" + humanFileSize(chart.datasets[tooltipItem.datasetIndex].data[tooltipItem.index])
+                    }
+                }
+            }
+        }
+    };
+    var trafficChart = new Chart($("#traffic"), trafficCfg);
+    $(function() {
+        var req = function() {
+            $.post("/main/default", {}, function(data) {
+                if (data.code) {
+                    var online = data.data["online"]
+                    onlineCfg.data.datasets[0].data = [online["client"], online["server"], online["cluster"]]
+                    onlineChart.update();
+                    var traffic = data.data["traffic"]
+                    trafficCfg.data.datasets[0].data = [traffic["total_use"], traffic["total_left"]]
+                    trafficChart.update();
+                    setTimeout(req, 30000)
+                }
+            }, "json");
+        }
+        req();
+    });
+
+    function humanFileSize(size) {
+        var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)));
+        i = size > 0 ? i : 0;
+        return (size / Math.pow(1024, i)).toFixed(2) * 1 + ['B', 'KB', 'MB', 'GB', 'TB'][i];
+    }
+</script>

@@ -1,0 +1,126 @@
+1.打开一个端口
+    请求方式:GET
+    url规则:
+    http://clusteraddr.com:37080/port/open/:TunnelID/:ServerToken/:ServerBindIP/:ServerListenPort/:ClientToken/:ClientLocalHost/:ClientLocalPort/:Protocol/:BytesPerSec
+    比如:
+    https://127.0.0.1:37080/port/open/1/guest/0.0.0.0/20020/guest_client/127.0.0.1/22/1/0
+
+    返回:
+    成功:
+    {"code":1,"message":"","data":null}
+    失败:
+    {"code":0,"message":"错误原因","data":null}
+提示：
+BytesPerSec 是速度限制单位是：字节／秒，0代表不限制，大于0代表速度最大限制
+Protocol：1代表TCP，2代表UDP
+
+2.关闭一个端口
+    请求方式:GET
+    url规则:
+    http://clusteraddr.com:37080/port/close/:TunnelID
+    比如:
+    https://127.0.0.1:37080/port/close/1
+
+    返回:
+    成功:
+    {"code":1,"message":"success","data":null}
+    失败:
+    {"code":0,"message":"错误原因","data":null}
+
+3.获取端口状态
+    请求方式:GET
+    url规则:
+    http://clusteraddr.com:37080/port/close/:TunnelID
+    比如:
+    https://127.0.0.1:37080/port/close/1
+
+    返回:
+    成功:
+    {"code":1,"监听的地址和端口":"","data":null}
+    失败:
+    {"code":0,"message":"错误原因","data":null}
+
+4.把Server下线
+    请求方式:GET
+    url规则:
+    http://clusteraddr.com:37080/server/offline/:ServerToken
+    比如:
+    https://127.0.0.1:37080/server/offline/guest
+
+    返回:
+    成功:
+    {"code":1,"":"","data":null}
+    失败:
+    {"code":0,"message":"错误原因","data":null}
+
+5.把Client下线
+    请求方式:GET
+    url规则:
+    http://clusteraddr.com:37080/client/offline/:ClientToken
+    比如:
+    https://127.0.0.1:37080/client/offline/guest_client
+
+    返回:
+    成功:
+    {"code":1,"":"","data":null}
+    失败:
+    {"code":0,"message":"错误原因","data":null}
+
+6.获取全部Tunnel流量统计
+    统计的是Tunnel启动至今的流量，Tunnel被关闭之后流量统计会清除。启动的时候初始化为0。
+    请求方式:GET
+    url规则:
+    http://clusteraddr.com:37080/traffic/count
+    比如:
+    https://127.0.0.1:37080/traffic/count
+
+    返回:
+    成功:
+    {"code":1,"message":"","data":{"Total":{"Tunnels":1,"Servers":1,"Clients":1,"UploadBytes":147,"DownloadBytes":81363173,"TotalBytes":81363320,"Connections":1},"Traffic":{"1":{"limit":102400,"negative":81363173,"positive":147}}}}
+    data:里面的key是TunnelID，negative代表server到用户的流量（可以理解为下载），
+    positive代表用户到server的流量（可以理解为上传）
+    失败:
+    {"code":0,"message":"错误原因","data":null}
+
+7.获取单个Tunnel流量统计
+    统计的是Tunnel启动至今的流量，Tunnel被关闭之后流量统计会清除。启动的时候初始化为0。
+    请求方式:GET
+    url规则:
+    http://clusteraddr.com:37080/traffic/count/:TunnelID
+    比如:
+    https://127.0.0.1:37080/traffic/count/1
+
+    返回:
+    成功:
+    {"code":1,"message":"","data":{"1":{"negative":1203378206,"positive":306}}}
+    data:里面的key是TunnelID，negative代表server到用户的流量（可以理解为下载），
+    positive代表用户到server的流量（可以理解为上传）
+    失败:
+    {"code":0,"message":"错误原因","data":null}
+
+
+8.获取Server状态
+    请求方式:GET
+    url规则:
+    http://clusteraddr.com:37080/server/status/:ServerToken
+    比如:
+    https://127.0.0.1:37080/server/status/guest
+
+    返回:
+    成功:
+    {"code":1,"":"","data":null}//说明存在
+    失败:
+    {"code":0,"message":"错误原因","data":null}//说明不存在
+
+9.获取Client状态
+    请求方式:GET
+    url规则:
+    http://clusteraddr.com:37080/client/status/:ClientToken
+    比如:
+    https://127.0.0.1:37080/client/status/guest_client
+
+    返回:
+    成功:
+    {"code":1,"":"","data":null}//说明存在
+    失败:
+    {"code":0,"message":"错误原因","data":null}//说明不存在

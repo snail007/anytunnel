@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>{{.titles}}</title>
+    {{template "common/head.html" .}}
+
+    <script src="/static/style/plugins/jquery.form.min.js"></script>
+    <link rel="stylesheet" href="/static/style/plugins/icon/icon-selector.css">
+    <link rel="stylesheet" href="/static/style/plugins/selectaor/fm.selectator.jquery.css">
+    <script src="/static/style/plugins/icon/icon-selector.js"></script>
+    <script src="/static/style/plugins/selectaor/fm.selectator.jquery.js"></script>
+    <link rel="stylesheet" href="/static/style/plugins/datepicker/bootstrap-datepicker3.css">
+    <script src="/static/style/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="/static/style/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+
+</head>
+
+<body>
+    {{.LayoutContent}} {{template "common/foot.html" .}}
+    <script src="/static/style/common/form.js"></script>
+</body>
+
+</html>

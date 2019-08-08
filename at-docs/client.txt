@@ -1,0 +1,24 @@
+client 启动重要参数说明:
+
+--url               调度地址,应该是cluster的api调度地址,
+                    server访问url的时候会在url后面加上token参数,比如:https://at.com/cluster?token=xxxx
+                    返回状态码必须是200,并且结果必须是某个cluster的域名或者ip,不能包含其它字符,比如换行符
+
+--token             登录cluster使用的token,必须参数,同一个token只能在一个client使用,
+                    如果在多个client使用,前面登录的client会被挤下线
+
+--conns-port        cluster数据端口,默认是:37501
+
+--control-port      cluster控制端口,默认是:37501
+
+提示:
+如果url是空,则可以通过--host指定cluster的地址(域名或者ip),--host默认是127.0.0.1
+
+
+所以有两种启动方式:
+1.通过调度
+at-client --token=abcxxx --url=https://xxxx.com/xxxx
+--url参数,在产品发布的时候,url会写死到代码里面,启动的时候无需指定.
+
+2.不通过调度
+at-client --token=abcxxx --url="" --host=test.at.com

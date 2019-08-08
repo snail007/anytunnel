@@ -1,0 +1,22 @@
+表单使用说明:
+1.ajax 提交表单
+    给form加上class:"ajaxform"即可.
+    回调:
+    默认会自动判断返回的数据是否是json,判断code执行错误和成功的处理提示.
+    如果需要额外的回调,可以给form定义下面的属性,然后在页面定义对应名称的function即可.
+    ajaxPre:"formPre"  //提交表单之前执行的方法,参数是:(arr, $form, options),返回false阻止表单提交
+    ajaxError:"formError"//提交表单出错执行的方法,参数是:(jqXHR, textStatus, textErrorThrown),返回false阻止表单提交
+    ajaxSuccess:"formSuccess"//提交表单成功执行的方法,参数是:(data, textStatus, jqXHR),返回false阻止表单提交
+    ajaxAlways:"formAlways"//提交表单之后执行的方法,参数是:(jqXHR, textStatus),返回false阻止表单提交
+    返回实例:
+    {
+        code:1|0,
+        message:"anyformat tip",
+        data:'any format data',
+        redirect:{
+            url:'url',
+            sleep:500
+            }
+    }
+2.select 默认值设置,只需要对select标签设置一个default属性和值即可.
+         那么值对应的option就会被默认选中.

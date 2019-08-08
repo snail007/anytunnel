@@ -1,0 +1,53 @@
+<style>
+    .forx {
+        display: none;
+    }
+</style>
+{{$area:=.area}} {{$regions:=.regions}}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal ajaxform" ajaxSuccess="success" ajaxAlways="always" method="post" action="/web/area/{{.action}}">
+            <input type="hidden" name="area_id" value="{{$area.area_id}}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>区域名称</label>
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control" value="{{$area.name}}">
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>类型</label>
+                <div class="col-sm-4">
+                    <select name="cs_type" class="form-control" default="{{$area.cs_type}}">
+                                <option value="server">Server</option>                   
+                                <option value="client">Client</option>
+                        </select>
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger"> * </span>访问控制</label>
+                <div class="col-sm-4">
+                    <select name="is_forbidden" class="form-control" default="{{$area.is_forbidden}}">
+                                    <option value="1">禁止</option>                   
+                                    <option value="0">允许</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <span class="text-danger"> * </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="logo_box">
+    <h3>你好,欢迎<b style="color:darkgoldenrod">注册</b>隧道云</h3>
+    <form class="register_form" action="/author/signin" method="post">
+        <div class="input_outer">
+            <span class="u_user"></span>
+            <input name="username" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入用户名">
+        </div>
+        <div class="input_outer">
+            <span class="us_uer"></span>
+            <input name="password" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;" value="" type="password" placeholder="请输入密码">
+        </div>
+        <div class="input_outer">
+            <span class="u_email"></span>
+            <input name="email" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入邮箱">
+        </div>
+        <div class="mb2"><a class="act-but submit" href="javascript:;" onclick="Author.register()" style="color: #FFFFFF">注册</a></div>
+    </form>
+    <p class="error_message" style="text-align: center;color: indianred;display: none"><strong></strong></p>
+    <p class="success_message" style="text-align: center;color: #00ba8b;display: none"><strong></strong></p>
+    <h5 style="text-align: center;"><a href="/" style="color: #00ba8b"> >>返回首页 </a>|<a href="/author/login" style="color: #00ba8b">已有账号？点击登录 <<</a></h5>
+</div>
+<script type="text/javascript" src="/static/js/module/author.js"></script>
